@@ -1,0 +1,239 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.OleDb;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Ylovka.Forms
+{
+    public partial class MainWindow : Form
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            FillClient();
+        }
+
+        private void FillClient()
+        {
+            string SQL = "Select * FROM Товары";
+
+            OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
+            conn.Open();
+
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(SQL, conn);
+            DataSet ds = new DataSet();
+            dataAdapter.Fill(ds);
+
+            dataGridView1.DataSource = ds.Tables[0];
+            conn.Close();
+        }
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(Globals.userType == "Admin")
+            {
+                Clients form = new Clients();
+
+                form.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Только администратор может просматривать таблицу клиентов");
+            }
+        }
+
+        private void товарыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            if(Globals.userType == "Admin")
+            {
+                button1.Show();
+                button2.Show();
+                button3.Show();
+            }
+            else
+            {
+                button1.Hide();
+                button2.Hide();
+                button3.Hide();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Выберите одну строку!", "Внимание!");
+                return;
+            }
+
+            int index = dataGridView1.SelectedRows[0].Index;
+
+            if (dataGridView1.Rows[index].Cells[0].Value == null ||
+                dataGridView1.Rows[index].Cells[1].Value == null ||
+                dataGridView1.Rows[index].Cells[2].Value == null ||
+                dataGridView1.Rows[index].Cells[3].Value == null ||
+                dataGridView1.Rows[index].Cells[4].Value == null)
+            {
+                MessageBox.Show("Не все данные введены!", "Внимание!");
+                return;
+            }
+
+            string id = dataGridView1.Rows[index].Cells[0].Value.ToString();
+            string name = dataGridView1.Rows[index].Cells[1].Value.ToString();
+            string cost = dataGridView1.Rows[index].Cells[2].Value.ToString();
+            string count = dataGridView1.Rows[index].Cells[3].Value.ToString();
+            string manufacturer = dataGridView1.Rows[index].Cells[4].Value.ToString();
+
+            OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
+            conn.Open();
+
+            string Query = $"INSERT INTO Товары VALUES ('{id}', '{name}', '{cost}', '{count}', '{manufacturer}')";
+            OleDbCommand dbCommand = new OleDbCommand(Query, conn);
+
+            if (dbCommand.ExecuteNonQuery() != 1)
+                MessageBox.Show("Ошибка выполнения запроса!", "Ошибка!");
+            else
+                MessageBox.Show("Данные добавлены!", "Внимание!");
+            conn.Close();
+            FillClient();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Выберите одну строку!", "Внимание!");
+                return;
+            }
+
+            int index = dataGridView1.SelectedRows[0].Index;
+
+            if (dataGridView1.Rows[index].Cells[0].Value == null)
+            {
+                MessageBox.Show("Не все данные введены!", "Внимание!");
+                return;
+            }
+
+            string id = dataGridView1.Rows[index].Cells[0].Value.ToString();
+
+            OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
+            conn.Open();
+
+            string Query = "DELETE FROM Товары WHERE id = " + id;
+            OleDbCommand dbCommand = new OleDbCommand(Query, conn);
+
+            if (dbCommand.ExecuteNonQuery() != 1)
+                MessageBox.Show("Ошибка выполнения запроса!", "Ошибка!");
+            else
+                MessageBox.Show("Данные удалены!", "Внимание!");
+            conn.Close();
+            FillClient();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Выберите одну строку!", "Внимание!");
+                return;
+            }
+
+            int index = dataGridView1.SelectedRows[0].Index;
+
+            if (dataGridView1.Rows[index].Cells[0].Value == null ||
+                dataGridView1.Rows[index].Cells[1].Value == null ||
+                dataGridView1.Rows[index].Cells[2].Value == null ||
+                dataGridView1.Rows[index].Cells[3].Value == null ||
+                dataGridView1.Rows[index].Cells[4].Value == null)
+            {
+                MessageBox.Show("Не все данные введены!", "Внимание!");
+                return;
+            }
+
+            string id = dataGridView1.Rows[index].Cells[0].Value.ToString();
+            string name = dataGridView1.Rows[index].Cells[1].Value.ToString();
+            string cost = dataGridView1.Rows[index].Cells[2].Value.ToString();
+            string count = dataGridView1.Rows[index].Cells[3].Value.ToString();
+            string manufacturer = dataGridView1.Rows[index].Cells[4].Value.ToString();
+
+            OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
+            conn.Open();
+
+            string Query = $"UPDATE Товары SET Название = '{name}' , Цена =  '{cost}', Количество = '{count}', Производитель = '{manufacturer}' WHERE ID = {id}";
+            OleDbCommand dbCommand = new OleDbCommand(Query, conn);
+
+            if (dbCommand.ExecuteNonQuery() != 1)
+                MessageBox.Show("Ошибка выполнения запроса!", "Ошибка!");
+            else
+                MessageBox.Show("Данные изменены!", "Внимание!");
+            conn.Close();
+            FillClient();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Выберите одну строку!", "Внимание!");
+                return;
+            }
+
+            int index = dataGridView1.SelectedRows[0].Index;
+
+            if (dataGridView1.Rows[index].Cells[0].Value == null ||
+                dataGridView1.Rows[index].Cells[1].Value == null ||
+                dataGridView1.Rows[index].Cells[2].Value == null ||
+                dataGridView1.Rows[index].Cells[3].Value == null ||
+                dataGridView1.Rows[index].Cells[4].Value == null)
+            {
+                MessageBox.Show("Не все данные введены!", "Внимание!");
+                return;
+            }
+
+            string id = dataGridView1.Rows[index].Cells[0].Value.ToString();
+            string name = dataGridView1.Rows[index].Cells[1].Value.ToString();
+            string cost = dataGridView1.Rows[index].Cells[2].Value.ToString();
+            string customer = Globals.currentLogin.ToString();
+            string manufacturer = dataGridView1.Rows[index].Cells[4].Value.ToString();
+
+            OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
+            conn.Open();
+
+            string Query = $"INSERT INTO Заказы(Название, Цена, Заказчик, Производитель) VALUES ( '{name}', '{cost}', '{customer}', '{manufacturer}')";
+            OleDbCommand dbCommand = new OleDbCommand(Query, conn);
+
+            if (dbCommand.ExecuteNonQuery() != 1)
+                MessageBox.Show("Ошибка выполнения запроса!", "Ошибка!");
+            else
+                MessageBox.Show("Ваш товар успешно заказан!", "Внимание!");
+            conn.Close();
+        }
+
+        private void заказыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Orders form = new Orders();
+
+            form.Show();
+            this.Close();
+        }
+
+        private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Authorization form = new Authorization();
+
+            form.Show();
+            this.Close();
+        }
+    }
+}

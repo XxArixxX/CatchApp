@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\Ylovka\Ylovka\bin\Debug\Ylovka.exe.config
+C:\Users\user\source\repos\Ylovka\Ylovka\bin\Debug\Ylovka.exe
+C:\Users\user\source\repos\Ylovka\Ylovka\bin\Debug\Ylovka.pdb
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.Authorization.resources
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.Registration.resources
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Properties.Resources.resources
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.csproj.GenerateResource.cache
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.exe
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.pdb
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.MainWindow.resources
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.Clients.resources
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.Orders.resources
