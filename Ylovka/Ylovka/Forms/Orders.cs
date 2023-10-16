@@ -115,11 +115,12 @@ namespace Ylovka.Forms
             string password = dataGridView1.Rows[index].Cells[2].Value.ToString();
             string customer = dataGridView1.Rows[index].Cells[3].Value.ToString();
             string manufacturer = dataGridView1.Rows[index].Cells[4].Value.ToString();
+            string pickup = dataGridView1.Rows[index].Cells[5].Value.ToString();
 
             OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
             conn.Open();
 
-            string Query = $"INSERT INTO Заказы VALUES ('{id}', '{login}', '{password}', '{customer}', '{manufacturer}')";
+            string Query = $"INSERT INTO Заказы VALUES ('{id}', '{login}', '{password}', '{customer}', '{manufacturer}', '{pickup}')";
             OleDbCommand dbCommand = new OleDbCommand(Query, conn);
 
             if (dbCommand.ExecuteNonQuery() != 1)
@@ -187,11 +188,12 @@ namespace Ylovka.Forms
             string password = dataGridView1.Rows[index].Cells[2].Value.ToString();
             string customer = dataGridView1.Rows[index].Cells[3].Value.ToString();
             string manufacturer = dataGridView1.Rows[index].Cells[4].Value.ToString();
+            string pickup = dataGridView1.Rows[index].Cells[5].Value.ToString();
 
             OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.ConnStr);
             conn.Open();
 
-            string Query = $"UPDATE Заказы SET Название = '{login}' , Цена =  '{password}', Заказчик = '{customer}', Производитель = '{manufacturer}' WHERE ID = {id}";
+            string Query = $"UPDATE Заказы SET Название = '{login}', Цена =  '{password}', Заказчик = '{customer}', Производитель = '{manufacturer}', [Пункт выдачи] = '{pickup}' WHERE ID = {id}";
             OleDbCommand dbCommand = new OleDbCommand(Query, conn);
 
             if (dbCommand.ExecuteNonQuery() != 1)

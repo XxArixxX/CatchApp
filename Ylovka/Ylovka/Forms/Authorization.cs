@@ -42,7 +42,7 @@ namespace Ylovka.Forms
                     Globals.userType = "Admin";
                     Globals.currentLogin = textBox1.Text;
                     conn.Close();
-                    MainWindow form = new MainWindow();
+                    productList form = new productList();
 
                     form.Show();
                     this.Hide();
@@ -52,7 +52,7 @@ namespace Ylovka.Forms
                     Globals.userType = "Client";
                     Globals.currentLogin = textBox1.Text;
                     conn.Close();
-                    MainWindow form = new MainWindow();
+                    productList form = new productList();
 
                     form.Show();
                     this.Hide();
@@ -67,7 +67,7 @@ namespace Ylovka.Forms
                         Globals.userType = "Manager";
                         Globals.currentLogin = textBox1.Text;
                         conn.Close();
-                        MainWindow form = new MainWindow();
+                        productList form = new productList();
 
                         form.Show();
                         this.Hide();
@@ -82,7 +82,7 @@ namespace Ylovka.Forms
                             Globals.userType = "Admin";
                             Globals.currentLogin = textBox1.Text;
                             conn.Close();
-                            MainWindow form = new MainWindow();
+                            productList form = new productList();
 
                             form.Show();
                             this.Hide();
@@ -113,7 +113,7 @@ namespace Ylovka.Forms
         {
             Globals.userType = "Client";
             Globals.currentLogin = "guest";
-            MainWindow form = new MainWindow();
+            productList form = new productList();
 
             form.Show();
             this.Hide();

@@ -13,3 +13,4 @@ C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.pdb
 C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.MainWindow.resources
 C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.Clients.resources
 C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.Orders.resources
+C:\Users\user\source\repos\Ylovka\Ylovka\obj\Debug\Ylovka.Forms.productList.resources
